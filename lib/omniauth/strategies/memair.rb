@@ -24,13 +24,13 @@ module OmniAuth
         end
       end
 
-      uid { raw_info['id'].to_s }
+      uid { raw_info['data']['UserDetails']['id'].to_s }
 
       info do
         {
-          'id' => raw_info['id'],
-          'email' => raw_info['email'],
-          'timezone' => raw_info['timezone'],
+          'id' => raw_info['data']['UserDetails']['id'],
+          'email' => raw_info['data']['UserDetails']['email'],
+          'timezone' => raw_info['data']['UserDetails']['timezone'],
         }
       end
 
