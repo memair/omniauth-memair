@@ -1,12 +1,9 @@
 require 'omniauth-oauth2'
 require 'httparty'
 
-class MemairGraphql < Memair
-end
-
 module OmniAuth
   module Strategies
-    class MemairOAuth < OmniAuth::Strategies::OAuth2
+    class Memair < OmniAuth::Strategies::OAuth2
       option :client_options, {
         :site => 'https://memair.com',
         :authorize_url => 'https://memair.com/oauth/authorize',
