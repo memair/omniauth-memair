@@ -1,8 +1,12 @@
 require 'omniauth-oauth2'
+require 'httparty'
+
+class MemairGraphql < Memair
+end
 
 module OmniAuth
   module Strategies
-    class Memair < OmniAuth::Strategies::OAuth2
+    class MemairOAuth < OmniAuth::Strategies::OAuth2
       option :client_options, {
         :site => 'https://memair.com',
         :authorize_url => 'https://memair.com/oauth/authorize',
@@ -34,7 +38,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= Memair.new(access_token.token).query('query get_user_details{UserDetails{id email timezone}}')['data']['UserDetails']
+        @raw_info ||= HTTParty.post("https://memair.com/graphql", body: { access_token: access_token.token, query: 'query get_user_details{UserDetails{id email timezone}}' }, timeout: 180)
       end
 
       def callback_url

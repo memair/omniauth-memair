@@ -17,6 +17,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'omniauth', '~> 1.5'
   gem.add_dependency 'omniauth-oauth2', '>= 1.4.0', '< 2.0'
-  gem.add_dependency 'memair', '0.0.27'
+  gem.add_dependency 'httparty', '~> 0.16'
   gem.add_development_dependency 'rspec', '~> 3.5'
 end
