@@ -1,7 +1,7 @@
 [![Gem](https://img.shields.io/gem/v/omniauth-memair.svg?style=flat)](http://rubygems.org/gems/omniauth-memair)
 [![License](http://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](https://github.com/memair/omniauth-memair/blob/master/LICENSE)
 [![Gregology](https://img.shields.io/badge/contact-Gregology-blue.svg?style=flat)](http://gregology.net/contact/)
-[![Downloads](https://img.shields.io/gem/dt/gstatsat.svg?style=flat)](http://rubygems.org/gems/omniauth-memair)
+[![Downloads](https://img.shields.io/gem/dt/omniauth-memair.svg?style=flat)](http://rubygems.org/gems/omniauth-memair)
 
 # Omniauth-memair
 
