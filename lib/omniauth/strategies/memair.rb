@@ -4,6 +4,8 @@ require 'httparty'
 module OmniAuth
   module Strategies
     class Memair < OmniAuth::Strategies::OAuth2
+      DEFAULT_SCOPE = 'user_details'
+
       option :client_options, {
         :site => 'https://memair.com',
         :authorize_url => 'https://memair.com/oauth/authorize',
@@ -21,6 +23,7 @@ module OmniAuth
               params[v.to_sym] = request.params[v]
             end
           end
+          params[:scope] ||= DEFAULT_SCOPE
         end
       end
 
@@ -36,6 +39,10 @@ module OmniAuth
 
       def raw_info
         @raw_info ||= HTTParty.post("https://memair.com/graphql", body: { access_token: access_token.token, query: 'query get_user_details{UserDetails{id email timezone}}' }, timeout: 180)
+      rescue ::Errno::ETIMEDOUT
+        raise ::Timeout::Error
+      rescue ::OAuth::Error => e
+        raise e.response.inspect
       end
 
       def callback_url
