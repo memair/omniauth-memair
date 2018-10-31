@@ -12,20 +12,7 @@ module OmniAuth
         :token_url => 'https://memair.com/oauth/token'
       }
 
-      def request_phase
-        super
-      end
-
-      def authorize_params
-        super.tap do |params|
-          %w[scope client_options].each do |v|
-            if request.params[v]
-              params[v.to_sym] = request.params[v]
-            end
-          end
-          params[:scope] ||= DEFAULT_SCOPE
-        end
-      end
+      option :authorize_options, [:scope, :permissions]
 
       uid { raw_info['data']['UserDetails']['id'].to_s }
 
@@ -35,6 +22,21 @@ module OmniAuth
           'email' => raw_info['data']['UserDetails']['email'],
           'timezone' => raw_info['data']['UserDetails']['timezone'],
         }
+      end
+
+      def request_phase
+        super
+      end
+
+      def authorize_params
+        super.tap do |params|
+          options[:authorize_options].each do |option|
+            params[option] = request.params[option.to_s] if request.params[option.to_s]
+          end
+
+          params[:redirect_uri] = options[:redirect_uri] unless options[:redirect_uri].nil?
+          params[:scope] ||= DEFAULT_SCOPE
+        end
       end
 
       def raw_info
