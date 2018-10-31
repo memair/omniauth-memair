@@ -35,7 +35,8 @@ module OmniAuth
           end
 
           params[:redirect_uri] = options[:redirect_uri] unless options[:redirect_uri].nil?
-          params[:scope] = params[:scope]&.include?(DEFAULT_SCOPE) ? params[:scope] : params[:scope] + ' ' + DEFAULT_SCOPE
+
+          params[:scope] = params[:scope]&.include?(DEFAULT_SCOPE) ? params[:scope] : (DEFAULT_SCOPE + ' ' + params[:scope].to_s).strip
         end
       end
 
