@@ -20,7 +20,7 @@ module OmniAuth
         {
           'id' => raw_info['data']['UserDetails']['id'],
           'email' => raw_info['data']['UserDetails']['email'],
-          'timezone' => raw_info['data']['UserDetails']['timezone'],
+          'time_zone' => raw_info['data']['UserDetails']['time_zone'],
         }
       end
 
