@@ -41,7 +41,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= HTTParty.post("https://memair.com/graphql", body: { access_token: access_token.token, query: 'query get_user_details{UserDetails{id email time_zone}}' }, timeout: 180)
+        @raw_info ||= HTTParty.post("https://memair.com/graphql", body: { access_token: access_token.token, query: 'query get_user_details{UserDetails{id email time_zone}}' }.to_json, headers: { 'Content-Type': 'application/json' }, timeout: 180)
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
       rescue ::OAuth::Error => e
